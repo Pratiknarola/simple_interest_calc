@@ -68,6 +68,9 @@ class _SIformState extends State<SIform> {
                       if (value.isEmpty){
                         return 'Please enter principle amount';
                       }
+                      if (! isNumeric(value)){
+                        return 'Enter only digits';
+                      }
                     },
                   ),
                 ),
@@ -78,6 +81,9 @@ class _SIformState extends State<SIform> {
                     validator: (String value){
                       if (value.isEmpty){
                         return 'Please enter rate of Interest';
+                      }
+                      if (! isNumeric(value)){
+                        return 'Enter only digits';
                       }
                     },
                     style: textStyle,

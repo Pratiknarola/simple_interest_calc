@@ -34,8 +34,8 @@ class _SIformState extends State<SIform> {
                 decoration: InputDecoration(
                     labelText: 'Principle',
                     hintText: 'Enter principle e.g. 12000',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
-                ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
                 keyboardType: TextInputType.number,
               ),
             ),
@@ -45,18 +45,37 @@ class _SIformState extends State<SIform> {
                 decoration: InputDecoration(
                     labelText: 'Rate of interest',
                     hintText: '% rate e.g. 10%',
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))
-                ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0))),
                 keyboardType: TextInputType.number,
               ),
             ),
-
-            Row(
-              children: <Widget>[
-
-              ],
-            )
-
+            Padding(
+                padding: EdgeInsets.only(top: _minPadding, bottom: _minPadding),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                            labelText: 'Term',
+                            hintText: 'time in years',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0))),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    Expanded(
+                        child: DropdownButton<String>(
+                            items: _currencies.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            value: _currencies[0],
+                            onChanged: (String newValueSelected) {})),
+                  ],
+                ))
           ],
         ),
       ),

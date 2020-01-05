@@ -6,6 +6,10 @@ void main() {
     title: "Simple interest calculator",
     home: SIform(),
     debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      primaryColor: Colors.indigo,
+      accentColor: Colors.indigoAccent,
+    ),
   ));
 }
 
@@ -21,8 +25,13 @@ class _SIformState extends State<SIform> {
   var _currencies = ["Rupees", "Dollars", "Pounds", "Yens"];
   final _minPadding = 5.0;
 
+
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = Theme.of(context).textTheme.title;
+
+    var CurrentSelected = "Rupees";
+    var Result = "";
     return Scaffold(
       appBar: AppBar(
         title: Text("Simple Interest Calc"),
@@ -38,9 +47,11 @@ class _SIformState extends State<SIform> {
                   padding:
                       EdgeInsets.only(top: _minPadding, bottom: _minPadding),
                   child: TextField(
+                    style: textStyle,
                     decoration: InputDecoration(
                         labelText: 'Principle',
                         hintText: 'Enter principle e.g. 12000',
+                        labelStyle: textStyle,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0))),
                     keyboardType: TextInputType.number,
@@ -50,9 +61,11 @@ class _SIformState extends State<SIform> {
                   padding:
                       EdgeInsets.only(top: _minPadding, bottom: _minPadding),
                   child: TextField(
+                    style: textStyle,
                     decoration: InputDecoration(
                         labelText: 'Rate of interest',
                         hintText: '% rate e.g. 10%',
+                        labelStyle: textStyle,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0))),
                     keyboardType: TextInputType.number,
@@ -68,9 +81,11 @@ class _SIformState extends State<SIform> {
                             decoration: InputDecoration(
                                 labelText: 'Term',
                                 hintText: 'time in years',
+                                labelStyle: textStyle,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5.0))),
                             keyboardType: TextInputType.number,
+                            style: textStyle,
                           ),
                         ),
                         Container(
@@ -84,29 +99,46 @@ class _SIformState extends State<SIform> {
                                     child: Text(value),
                                   );
                                 }).toList(),
-                                value: _currencies[0],
-                                onChanged: (String newValueSelected) {})),
+                                value: CurrentSelected,
+                                onChanged: (String newValueSelected) {
+                                  CurrentSelected = newValueSelected;
+                                  setState(() {
+                                    CurrentSelected = newValueSelected;
+                                  });
+                                })),
                       ],
                     )),
                 Padding(
-                    padding: EdgeInsets.only(top: _minPadding, bottom: _minPadding),
+                    padding:
+                        EdgeInsets.only(top: _minPadding, bottom: _minPadding),
                     child: Row(
                       children: <Widget>[
                         Expanded(
                           child: RaisedButton(
-                            child: Text("Calculate"),
+                            child: Text("Calculate", style: textStyle,),
                             onPressed: () {},
                           ),
                         ),
-                        Container(width: _minPadding * 2,),
+                        Container(
+                          width: _minPadding * 2,
+                        ),
                         Expanded(
                           child: RaisedButton(
-                            child: Text("Reset"),
+                            child: Text("Reset", style: textStyle,),
                             onPressed: () {},
                           ),
                         )
                       ],
-                    ))
+                    )),
+                Container(
+                  child: Text("Simple text",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 20.0
+                  ),),
+                  padding: EdgeInsets.all(_minPadding * 5),
+                )
+                
               ],
             ),
           )
